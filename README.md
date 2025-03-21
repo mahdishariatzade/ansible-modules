@@ -1,13 +1,15 @@
-این پروژه شامل دو ماژول سفارشی برای Ansible است:
-- `sqlite_editor`: برای خواندن و ویرایش دیتابیس SQLite
-- `json_editor`: برای ویرایش داده‌های JSON (با پشتیبانی از ساختارهای تو در تو)
+This repository contains a custom Ansible Collection, `mahdishariatzade.my_ansible_modules`, featuring two modules:
+- **`sqlite_editor`**: A module to read from and write to SQLite databases using SQL queries.
+- **`json_editor`**: A module to edit JSON data, including nested structures, using JSONPath expressions.
 
-## پیش‌نیازها
-- Ansible نسخه 2.9 یا بالاتر
-- برای ماژول `json_editor`:
+These modules are designed to simplify database and JSON manipulation tasks in your Ansible playbooks.
+
+## Prerequisites
+- **Ansible**: Version 2.9.0 or higher.
+- **Python**: Required for running Ansible and the modules.
+- **jsonpath-rw**: Required for the `json_editor` module. Install it with:
   ```bash
   pip install jsonpath-rw
   ```
-
 ## install:
 - `ansible-galaxy collection install mahdishariatzade.sqlite_json_module`
