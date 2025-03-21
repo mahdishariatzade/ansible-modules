@@ -46,3 +46,30 @@ This module allows you to execute SQL queries on an SQLite database, enabling bo
        db_path: "/path/to/database.db"
        query: "INSERT INTO users (id, name, data) VALUES (?, ?, ?)"
        params: [1, "Mahdi", '{"role": "admin", "age": 30}']
+
+#### Combined Example: Edit JSON in SQLite
+This example shows how to fetch JSON data from SQLite, edit it, and update the database.
+
+```yaml
+- name: Edit JSON in SQLite database
+  hosts: localhost
+  tasks:
+    - name: Fetch JSON data from SQLite
+      mahdishariatzade.sqlite_json_module.sqlite_editor:
+        db_path: "/path/to/database.db"
+        query: "SELECT data FROM users WHERE id = ?"
+        params: [1]
+      register: db_result
+
+    - name: Edit JSON role
+      mahdishariatzade.sqlite_json_module.json_editor:
+        json_data: "{{ db_result.result[0][0] }}"
+        path: "$.role"
+        value: "developer"
+      register: json_result
+
+    - name: Update SQLite with modified JSON
+      mahdishariatzade.sqlite_json_module.sqlite_editor:
+        db_path: "/path/to/database.db"
+        query: "UPDATE users SET data = ? WHERE id = ?"
+        params: ["{{ json_result.result }}", 1]
