@@ -1,0 +1,10 @@
+namespace: mahdishariatzade
+name: my_ansible_modules
+version: 1.0.0
+description: ماژول‌های سفارشی Ansible برای ویرایش SQLite و JSON
+authors:
+  - mahdi-shariat <mahdishariat@outlook.com>
+license: MIT
+repository: https://github.com/ali/my-ansible-modules
+dependencies:
+  "ansible.builtin": ">=2.9.0"
