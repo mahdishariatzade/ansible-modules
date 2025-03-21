@@ -3,6 +3,38 @@ from ansible.module_utils.basic import AnsibleModule
 import json
 import jsonpath_rw
 
+DOCUMENTATION = r'''
+---
+module: json_editor
+short_description: Edit JSON data including nested structures
+description:
+  - This module edits JSON data using JSONPath expressions, supporting nested structures.
+version_added: "1.0.0"
+author:
+  - Mahdi Shariat <mahdishariat@outlook.com>
+options:
+  json_data:
+    description: JSON data as a string
+    required: true
+    type: str
+  path:
+    description: JSONPath expression to locate the value to edit (e.g., $.store.book[0].title)
+    required: true
+    type: str
+  value:
+    description: New value to set at the specified path
+    required: true
+    type: raw
+requirements:
+  - jsonpath-rw (Python package)
+examples:
+  - name: Edit nested JSON
+    mahdishariatzade.my_ansible_modules.json_editor:
+      json_data: '{"store": {"book": [{"title": "Old Title"}]}}'
+      path: "$.store.book[0].title"
+      value: "New Title"
+'''
+
 def set_json_value(json_data, path, value):
     expr = jsonpath_rw.parse(path)
     for match in expr.find(json_data):
