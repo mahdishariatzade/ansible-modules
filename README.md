@@ -12,4 +12,6 @@ These modules are designed to simplify database and JSON manipulation tasks in y
   pip install jsonpath-rw
   ```
 ## install:
-- `ansible-galaxy collection install mahdishariatzade.sqlite_json_module`
+- ```
+  ansible-galaxy collection install mahdishariatzade.sqlite_json_module
+  ```
