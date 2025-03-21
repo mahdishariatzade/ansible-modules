@@ -1,0 +1,16 @@
+- name: Fetch user data from SQLite
+  mahdishariatzade.sqlite_json_module.sqlite_editor:
+    db_path: "/path/to/database.db"
+    query: "SELECT name, data FROM users WHERE id = ?"
+    params: [1]
+  register: result
+
+- name: Display the result
+  debug:
+    msg: "User: {{ result.result[0][0] }}, Data: {{ result.result[0][1] }}"
+---
+- name: Update user name in SQLite
+  mahdishariatzade.sqlite_json_module.sqlite_editor:
+    db_path: "/path/to/database.db"
+    query: "UPDATE users SET name = ? WHERE id = ?"
+    params: ["Mahdi Shariat", 1]

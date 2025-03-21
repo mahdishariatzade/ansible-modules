@@ -1,0 +1,21 @@
+- name: Change a simple JSON value
+  mahdishariatzade.sqlite_json_module.json_editor:
+    json_data: '{"name": "Old Name", "age": 25}'
+    path: "$.name"
+    value: "Mahdi"
+  register: result
+
+- name: Display modified JSON
+  debug:
+    var: result.result
+---
+- name: Update a nested JSON value
+  mahdishariatzade.sqlite_json_module.json_editor:
+    json_data: '{"store": {"book": [{"title": "Old Title", "price": 10}]}}'
+    path: "$.store.book[0].title"
+    value: "New Title"
+  register: result
+
+- name: Display modified JSON
+  debug:
+    var: result.result

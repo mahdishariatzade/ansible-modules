@@ -15,3 +15,34 @@ These modules are designed to simplify database and JSON manipulation tasks in y
 - ```
   ansible-galaxy collection install mahdishariatzade.sqlite_json_module
   ```
+
+
+## Usage
+
+Below are examples of how to use the `sqlite_editor` and `json_editor` modules in your Ansible playbooks.
+
+### Module: `sqlite_editor`
+This module allows you to execute SQL queries on an SQLite database, enabling both reading and writing operations.
+
+#### Parameters
+- **`db_path`** (required, string): Path to the SQLite database file.
+- **`query`** (required, string): SQL query to execute.
+- **`params`** (optional, list, default: `[]`): Parameters for the query to prevent SQL injection.
+
+#### Returns
+- For `SELECT` queries: A list of results (`result`).
+- For other queries (e.g., `INSERT`, `UPDATE`): A confirmation message (`msg`).
+
+#### Examples
+1. **Create a Table and Insert Data**
+   ```yaml
+   - name: Create a table in SQLite
+     mahdishariatzade.sqlite_json_module.sqlite_editor:
+       db_path: "/path/to/database.db"
+       query: "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, data TEXT)"
+
+   - name: Insert a user with JSON data
+     mahdishariatzade.sqlite_json_module.sqlite_editor:
+       db_path: "/path/to/database.db"
+       query: "INSERT INTO users (id, name, data) VALUES (?, ?, ?)"
+       params: [1, "Mahdi", '{"role": "admin", "age": 30}']
