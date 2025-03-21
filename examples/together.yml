@@ -1,0 +1,33 @@
+- name: Edit JSON in SQLite database
+  hosts: localhost
+  tasks:
+    - name: Fetch JSON data from SQLite
+      mahdishariatzade.sqlite_json_module.sqlite_editor:
+        db_path: "/path/to/database.db"
+        query: "SELECT data FROM users WHERE id = ?"
+        params: [1]
+      register: db_result
+
+    - name: Edit JSON role
+      mahdishariatzade.sqlite_json_module.json_editor:
+        json_data: "{{ db_result.result[0][0] }}"
+        path: "$.role"
+        value: "developer"
+      register: json_result
+
+    - name: Update SQLite with modified JSON
+      mahdishariatzade.sqlite_json_module.sqlite_editor:
+        db_path: "/path/to/database.db"
+        query: "UPDATE users SET data = ? WHERE id = ?"
+        params: ["{{ json_result.result }}", 1]
+
+    - name: Verify the update
+      mahdishariatzade.sqlite_json_module.sqlite_editor:
+        db_path: "/path/to/database.db"
+        query: "SELECT data FROM users WHERE id = ?"
+        params: [1]
+      register: final_result
+
+    - name: Display final JSON
+      debug:
+        msg: "Updated JSON: {{ final_result.result[0][0] }}"
