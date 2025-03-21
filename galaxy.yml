@@ -5,6 +5,7 @@ description: ماژول‌های سفارشی Ansible برای ویرایش SQLi
 authors:
   - mahdi-shariat <mahdishariat@outlook.com>
 license: MIT
+readme: README.md
 repository: https://github.com/mahdishariatzade/ansible-modules
 dependencies:
   "ansible.builtin": ">=2.9.0"
