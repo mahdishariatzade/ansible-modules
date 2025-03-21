@@ -46,7 +46,7 @@ This module allows you to execute SQL queries on an SQLite database, enabling bo
        db_path: "/path/to/database.db"
        query: "INSERT INTO users (id, name, data) VALUES (?, ?, ?)"
        params: [1, "Mahdi", '{"role": "admin", "age": 30}']
-
+  ```
 #### Combined Example: Edit JSON in SQLite
 This example shows how to fetch JSON data from SQLite, edit it, and update the database.
 
@@ -73,3 +73,4 @@ This example shows how to fetch JSON data from SQLite, edit it, and update the d
         db_path: "/path/to/database.db"
         query: "UPDATE users SET data = ? WHERE id = ?"
         params: ["{{ json_result.result }}", 1]
+```
