@@ -1,4 +1,4 @@
-This repository contains a custom Ansible Collection, `mahdishariatzade.my_ansible_modules`, featuring two modules:
+This repository contains a custom Ansible Collection, `mahdishariatzade.sqlite_json_module`, featuring two modules:
 - **`sqlite_editor`**: A module to read from and write to SQLite databases using SQL queries.
 - **`json_editor`**: A module to edit JSON data, including nested structures, using JSONPath expressions.
 
