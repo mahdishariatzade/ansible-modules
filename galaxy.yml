@@ -1,7 +1,7 @@
 namespace: mahdishariatzade
 name: sqlite_json_module
-version: 1.0.10
-description: ماژول‌های سفارشی Ansible برای ویرایش SQLite و JSON
+version: 1.1.10
+description: ماژول‌های سفارشی Ansible برای ویرایش SQLite و JSON و dns
 authors:
   - mahdi-shariat <mahdishariat@outlook.com>
 license: MIT
