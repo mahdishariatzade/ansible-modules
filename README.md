@@ -1,4 +1,4 @@
-This repository contains a custom Ansible Collection, `mahdishariatzade.sqlite_json_module`, featuring two modules:
+This repository contains a custom Ansible Collection, `mahdishariatzade.modules`, featuring two modules:
 - **`sqlite_editor`**: A module to read from and write to SQLite databases using SQL queries.
 - **`json_editor`**: A module to edit JSON data, including nested structures, using JSONPath expressions.
 
@@ -13,7 +13,7 @@ These modules are designed to simplify database and JSON manipulation tasks in y
   ```
 ## install:
 - ```
-  ansible-galaxy collection install mahdishariatzade.sqlite_json_module
+  ansible-galaxy collection install mahdishariatzade.modules
   ```
 
 
@@ -37,12 +37,12 @@ This module allows you to execute SQL queries on an SQLite database, enabling bo
 1. **Create a Table and Insert Data**
    ```yaml
    - name: Create a table in SQLite
-     mahdishariatzade.sqlite_json_module.sqlite_editor:
+     mahdishariatzade.modules.sqlite_editor:
        db_path: "/path/to/database.db"
        query: "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, data TEXT)"
 
    - name: Insert a user with JSON data
-     mahdishariatzade.sqlite_json_module.sqlite_editor:
+     mahdishariatzade.modules.sqlite_editor:
        db_path: "/path/to/database.db"
        query: "INSERT INTO users (id, name, data) VALUES (?, ?, ?)"
        params: [1, "Mahdi", '{"role": "admin", "age": 30}']
@@ -55,21 +55,21 @@ This example shows how to fetch JSON data from SQLite, edit it, and update the d
   hosts: localhost
   tasks:
     - name: Fetch JSON data from SQLite
-      mahdishariatzade.sqlite_json_module.sqlite_editor:
+      mahdishariatzade.modules.sqlite_editor:
         db_path: "/path/to/database.db"
         query: "SELECT data FROM users WHERE id = ?"
         params: [1]
       register: db_result
 
     - name: Edit JSON role
-      mahdishariatzade.sqlite_json_module.json_editor:
+      mahdishariatzade.modules.json_editor:
         json_data: "{{ db_result.result[0][0] }}"
         path: "$.role"
         value: "developer"
       register: json_result
 
     - name: Update SQLite with modified JSON
-      mahdishariatzade.sqlite_json_module.sqlite_editor:
+      mahdishariatzade.modules.sqlite_editor:
         db_path: "/path/to/database.db"
         query: "UPDATE users SET data = ? WHERE id = ?"
         params: ["{{ json_result.result }}", 1]

@@ -1,6 +1,6 @@
 namespace: mahdishariatzade
 name: modules
-version: 1.0.0
+version: 1.0.1
 description: ماژول‌های سفارشی Ansible برای ویرایش SQLite و JSON و dns
 authors:
   - mahdi-shariat <mahdishariat@outlook.com>
